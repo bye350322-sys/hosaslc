@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HOSA SLC — Textbooks</title>
+  <link rel="stylesheet" href="Document15.css">
+  <!-- Firebase compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAlVC4v3BYTQBj1ZeGXfU_m9snr8eSD9lI",
+      authDomain: "hosa-a1771.firebaseapp.com",
+      projectId: "hosa-a1771",
+      storageBucket: "hosa-a1771.firebasestorage.app",
+      messagingSenderId: "872242126821",
+      appId: "1:872242126821:web:5dcb868d68cc427628990c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    auth.onAuthStateChanged(user => {
+      if(!user) auth.signInAnonymously().catch(err => console.error('Auth error', err));
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">HS</div>
+      <div>
+        <div class="brand-title">HOSA SLC</div>
+        <div class="brand-sub">Textbooks</div>
+      </div>
+    </div>
+
+    <nav>
+      <a href="Document11.html">Home</a>
+      <a href="Document14.html" class="cta">Textbooks</a>
+      <a href="Document17.html">Notes</a>
+    </nav>
+  </header>
+
+  <main class="resources-main">
+    <aside class="filters card">
+      <h2>Search & Filters</h2>
+
+      <div class="form-row">
+        <input id="searchInput" type="text" placeholder="Search textbooks, titles, descriptions…" />
+      </div>
+
+      <div class="form-row" style="margin-top:12px;">
+        <label for="tagInput">Tags (comma separated)</label>
+        <input id="tagInput" type="text" placeholder="e.g., wellness, social-media" />
+      </div>
+
+      <div style="margin-top:14px; display:flex; gap:8px;">
+        <button id="applyFilters">Apply</button>
+        <button id="resetFilters" class="ghost">Reset</button>
+      </div>
+
+      <hr style="margin:14px 0;" />
+
+      <h3>Add textbook</h3>
+      <div class="form-row" style="flex-direction:column; gap:8px;">
+        <input id="resTitle" type="text" placeholder="Title" />
+        <input id="resURL" type="text" placeholder="https:// or Google Drive share link" />
+        <input id="resTags" type="text" placeholder="tags, comma, separated" />
+        <textarea id="resDesc" rows="3" placeholder="Short description (optional)"></textarea>
+        <div style="display:flex;gap:8px;">
+          <button id="addResourceBtn">Add textbook</button>
+          <button id="exportCsv" class="ghost">Export CSV</button>
+        </div>
+      </div>
+    </aside>
+
+    <section class="list card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2>Textbooks</h2>
+        <div class="small">Showing <span id="countDisplay">0</span> textbooks</div>
+      </div>
+
+      <div id="resourcesList" class="resources-list" style="margin-top:12px;"></div>
+    </section>
+  </main>
+
+  <footer>
+    created by Haena
+  </footer>
+
+  <script src="Document16.js"></script>
+</body>
+</html>
