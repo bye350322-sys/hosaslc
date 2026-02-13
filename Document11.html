@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HOSA SLC — Home</title>
+  <link rel="stylesheet" href="Document12.css">
+  <!-- Firebase compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAlVC4v3BYTQBj1ZeGXfU_m9snr8eSD9lI",
+      authDomain: "hosa-a1771.firebaseapp.com",
+      projectId: "hosa-a1771",
+      storageBucket: "hosa-a1771.firebasestorage.app",
+      messagingSenderId: "872242126821",
+      appId: "1:872242126821:web:5dcb868d68cc427628990c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Anonymous sign-in
+    auth.onAuthStateChanged(user => {
+      if(!user){
+        auth.signInAnonymously().catch(err => console.error('Auth error', err));
+      }
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">HS</div>
+      <div>
+        <div class="brand-title">HOSA SLC</div>
+        <div class="brand-sub">Home Page</div>
+      </div>
+    </div>
+
+    <nav>
+      <a href="Document11.html" class="cta">Home</a>
+      <a href="Document14.html">Textbooks</a>
+      <a href="Document17.html">Notes</a>
+    </nav>
+  </header>
+
+  <main>
+    <div>
+      <div class="card section">
+        <h1>Record Completed Task</h1>
+        <div class="sub">Select the member and the completed task to award points.</div>
+
+        <div class="form-row" style="margin-top:14px;">
+          <div>
+            <label for="memberSelect">Enter name:</label><br />
+            <select id="memberSelect" aria-label="Select member">
+              <option value="Haena">Haena</option>
+              <option value="Julia">Julia</option>
+              <option value="Juana">Juana</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="taskSelect">Enter completed task:</label><br />
+            <select id="taskSelect" aria-label="Select task">
+              <option value="textbook">Textbook</option>
+              <option value="review_notes">Review Notes</option>
+              <option value="practice">Practice</option>
+            </select>
+          </div>
+
+          <div style="align-self:end;">
+            <button id="addPointsBtn">Add Points</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="resetPoints" class="ghost">Reset Points</button>
+          <div class="small">Points: <strong>Textbook 20</strong> ; <strong>Review Notes 15</strong> ; <strong>Practice 10</strong></div>
+        </div>
+      </div>
+
+      <div class="card section">
+        <h1>Leaderboard</h1>
+        <div class="sub">Live ranking by total points</div>
+        <div id="leaderboard" class="leaderboard" style="margin-top:12px;"></div>
+      </div>
+    </div>
+
+    <aside class="right-col">
+      <div class="card todo-card">
+        <h1>Team To Do List</h1>
+        <div class="sub">Add items for the whole team</div>
+
+        <div class="todo-area" style="margin-top:12px;">
+          <div style="display:flex;gap:8px;align-items:flex-start;">
+            <textarea id="todoInput" placeholder="Add a team task" rows="4"></textarea>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button id="addTodoBtn">Add</button>
+              <button id="clearTodos" class="ghost">Clear To Do</button>
+            </div>
+          </div>
+
+          <div class="todo-list" id="todoList" style="margin-top:12px;"></div>
+
+          <div class="controls" style="margin-top:10px;">
+            <div class="small">To-dos sync in realtime across devices.</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    created by Haena
+  </footer>
+
+  <script src="Document13.js"></script>
+</body>
+</html>
