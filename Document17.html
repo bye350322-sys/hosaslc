@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HOSA SLC — Notes</title>
+  <link rel="stylesheet" href="Document18.css">
+  <!-- Firebase compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAlVC4v3BYTQBj1ZeGXfU_m9snr8eSD9lI",
+      authDomain: "hosa-a1771.firebaseapp.com",
+      projectId: "hosa-a1771",
+      storageBucket: "hosa-a1771.firebasestorage.app",
+      messagingSenderId: "872242126821",
+      appId: "1:872242126821:web:5dcb868d68cc427628990c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    auth.onAuthStateChanged(user => {
+      if(!user) auth.signInAnonymously().catch(err => console.error('Auth error', err));
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">HS</div>
+      <div>
+        <div class="brand-title">HOSA SLC</div>
+        <div class="brand-sub">Notes</div>
+      </div>
+    </div>
+
+    <nav>
+      <a href="Document11.html">Home</a>
+      <a href="Document14.html">Textbooks</a>
+      <a href="Document17.html" class="cta">Notes</a>
+    </nav>
+  </header>
+
+  <main class="notes-main">
+    <section class="card notes-form">
+      <h2>Add a Note Link</h2>
+      <div class="form-row" style="flex-direction:column; gap:8px; margin-top:12px;">
+        <input id="noteTitle" type="text" placeholder="Note title" />
+        <input id="noteURL" type="text" placeholder="https:// or Google Drive share link" />
+        <input id="noteTags" type="text" placeholder="tags, comma, separated" />
+        <textarea id="noteDesc" rows="3" placeholder="Short description (optional)"></textarea>
+        <div style="display:flex;gap:8px;">
+          <button id="addNoteBtn">Add Note</button>
+          <button id="exportNotes" class="ghost">Export CSV</button>
+          <button id="clearNotes" class="ghost">Clear All</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card notes-list">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2>Notes</h2>
+        <input id="searchNotes" type="text" placeholder="Search notes…" style="max-width:320px;" />
+      </div>
+
+      <div id="notesList" style="margin-top:12px; display:flex;flex-direction:column;gap:10px;"></div>
+    </section>
+  </main>
+
+  <footer>created by Haena</footer>
+
+  <script src="Document19.js"></script>
+</body>
+</html>
